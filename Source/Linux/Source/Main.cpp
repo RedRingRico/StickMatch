@@ -1,15 +1,15 @@
-#include <System/Debugger.hpp>
 #include <GitVersion.hpp>
 #include <Game.hpp>
+#include <iostream>
 
 int main( int p_Argc, char **p_ppArgv )
 {
-	zedTrace( "StickMatch [Rev. %s]\n", GIT_COMMITHASH );
+	std::cout << "StickMatch [Rev. " << GIT_COMMITHASH  << "]" << std::endl;
 
 	StickMatch::Game TheGame;
-	if( TheGame.Initialise( ) != ZED_OK )
+	if( TheGame.Initialise( ) == 0 )
 	{
-		zedTrace( "[main] Failed to initialise the game!\n" );
+		std::cout << "[main] Failed to initialise the game!" << std::endl;
 		return 0;
 	}
 

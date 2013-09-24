@@ -10,14 +10,14 @@ namespace StickMatch
 	{
 	}
 
-	ZED_UINT32 Game::Initialise( )
+	uint32 Game::Initialise( )
 	{
-		return ZED_OK;
+		return 1;
 	}
 
-	ZED_UINT32 Game::Execute( )
+	uint32 Game::Execute( )
 	{
-		return ZED_OK;
+		return 1;
 	}
 
 	void Game::Render( )

@@ -1,18 +1,13 @@
 ###############################################################################
 #                                    StickMatch Makefile [Linux x86] Ver. 1.0 #
 ###############################################################################
-
-ifeq ($(strip $(ZEDSDK)),)
-$(error Please set ZEDSDK to point to your ZED SDK root directory )
-endif
-
 ifndef TOPDIR
 export TOPDIR		:= $(shell cd ../../ && pwd)
 export TOPSRC		= $(TOPDIR)/Source
 export TARGETDIR	= $(TOPDIR)/Bin/$(PLATFORM)/$(ARCH)/$(BITSIZE)
 export OBJSDIR		= $(TOPDIR)/Obj/$(PLATFORM)/$(ARCH)/$(BITSIZE)/GCC/$(GCCVER)/$(BUILD)
 endif
-SOURCEDIR	= Source ../Common/Source
+SOURCEDIR	= Source ../Common/CPP/Source
 
 TARGET := StickMatch
 OUTFILE	=	$(TARGETDIR)/$(TARGET)_$(GCCVER)
@@ -68,7 +63,7 @@ CPPFLAGS	=	-c -m$(BITSIZE) -DZED_BUILD_$(BUILD_DEF) \
 				-DZED_PLATFORM_$(BUILD_PLATFORM)_$(BUILD_ARCH) \
 				-DZED_PLATFORM_$(BUILD_PLATFORM)_$(BUILD_ARCH)_$(BITSIZE) \
 				-DZED_BITSIZE_$(BITSIZE) -DZED_ARCH_$(BUILD_ARCH) \
-				-I$(TOPSRC)/Linux/Headers -I$(TOPSRC)/Common/Headers
+				-I$(TOPSRC)/Linux/Headers -I$(TOPSRC)/Common/CPP/Headers
 SYSIPATH	=
 INCPATH		=	-I$(ZEDSDK)/include/Linux
 SYSLPATH	=	
@@ -82,7 +77,7 @@ debug:		BUILD_TYPE	= debug
 debug:		BUILD_DEF	= DEBUG
 debug:		TARGET := $(TARGET)D
 debug:		CPPFLAGS += -g -ggdb -Wall -D_DEBUG $(CPPFLAGS_EXT)
-debug:		LIBS = -lZEDRendererD -lZEDArithmeticD -lZEDSystemD
+debug:		LIBS = 
 debug:		$(TARGET)
 
 ##### Release #####
@@ -91,7 +86,7 @@ release:	BUILD_TYPE	= release
 release:	BUILD_DEF	= RELEASE
 release:	TARGET := $(TARGET)
 release:	CPPFLAGS += -O3 $(CPPFLAGS_EXT)
-release:	LIBS = -lZEDRenderer -lZEDArithmetic -lZEDSystem
+release:	LIBS = 
 release:	LINKFLAGS += -Wl,-S
 release:	$(TARGET)
 
@@ -101,7 +96,7 @@ profile:	BUILD_TYPE	= profile
 profile:	BUILD_DEF	= PROFILE
 profile:	TARGET := $(TARGET)P
 profile:	CPPFLAGS += -O3 -g -ggdb -Wall -D_DEBUG $(CPPFLAGS_EXT)
-profile:	LIBS = -lZEDRendererP -lZEDArithmeticP -lZEDSystemP
+profile:	LIBS =
 profile:	$(TARGET)
 
 ##### Build the object files while not in the Obj directory ###################
