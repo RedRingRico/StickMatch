@@ -52,3 +52,7 @@ local.properties
 # Git version header #
 GitVersion.hpp
 
+# LaTeX temporary files
+*.aux
+*.log
+*.toc

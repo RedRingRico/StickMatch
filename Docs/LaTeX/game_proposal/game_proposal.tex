@@ -1,0 +1,88 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[pdftex]{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\begin{document}
+\begin{titlepage}
+\begin{center}
+\textsc{\LARGE StickMatch}\\[1.5cm]
+
+\HRule \\[0.4cm]
+{ \huge \bfseries Game Proposal \\[0.4cm] }
+\HRule \\[1.5cm]
+
+\begin{minipage}{0.4\textwidth}
+\begin{center} \large
+\emph{Rico}\\
+\end{center}
+\end{minipage}
+
+\vfill
+
+{\large \today}
+\end{center}
+\end{titlepage}
+\pagenumbering{Roman}
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+\section*{Overview \\ \HRule \\[0.4cm] }
+\addcontentsline{toc}{section}{Overview}
+StickMatch is a 3D fighting game for {\it Linux}, {\it Windows}, {\it Xbox},
+and {\it Pandora}.  The goal of the game is to Knock Out [KO] your opponent via
+a series of punches and kicks.  Initially, there will be a single player mode
+where the player must defeat eight opponents to win the game.  Each opponent
+has a separate {\it stage} which will be themed differently depending on the
+character the player is facing.  To advance to the next stage, players must
+complete a set amount of rounds (which can be set by the player), defaulting to
+three rounds to win each stage.
+
+Players have three main actions they can use: {\it punch}, {\it kick}, and {\it
+guard}.  {\it Puch} is a quick jab with either the left or right arm (this is
+determined by the cool-down time which resets the arm to alternate).  {\it
+Kick} is a high-reach attack, allowing for more damage to be dealt if landed
+successfully.  {\it Guard} blocks attacks and dampens the damage inflicted on
+the character.
+
+Multi player mode allows for two people to play against each other in any stage
+they see fit.  Whether it's Online or as a local game, the host can choose the
+settings for the game (such as the rounds available and stage rotation).
+\newpage
+\section*{Gameplay}
+\addcontentsline{toc}{section}{Gameplay}
+\tikzstyle{decision} = [diamond, draw, fill=blue!20, text width=4.5em,
+	text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, text width=5em,
+	text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse, fill=red!20, node distance=3cm,
+	minimum height=2em]
+\tikzstyle{input} = [draw, trapezium, text badly centered, fill=green!20,
+	text width=4.5em, minimum height=3em,
+	trapezium left angle=60, trapezium right angle=-60]
+
+\centering
+\begin{tikzpicture}[node distance = 2cm, auto]
+\node [block] (start) {Start};
+\node [input, below of=start] (charsel) {Select Character};
+\node [block, below of=charsel] (stagen) {Stage {\it n}};
+\node [decision, below of=stagen] (win) {Win};
+\node [decision, below of=win] (contleft) {Continues Left \textgreater 0};
+\node [decision, below of=contleft] (continue) {Continue};
+\node [block, right of=win, node distance=4cm] (npp) {{\it n}++};
+
+\path [line] (start) -- (charsel);
+\path [line] (charsel) -- (stagen);
+\path [line] (stagen) -- (win);
+\path [line] (win) -- node {No}(contleft);
+\path [line] (win) -- node [yshift=-0.5cm] {Yes}(npp);
+\path [line] (contleft) -- node {Yes}(continue);
+\path [line] (contleft) -| node[xshift=-1.5cm,yshift=-0.25cm] {No}([xshift=0.5cm]npp.east) |-(start);
+\path [line] (npp) |- (stagen);
+\path [line] (continue) -| node [xshift=1cm,yshift=-0.25cm]{Yes}([xshift=-1.5cm]continue.west) |-(stagen);
+\path [line] (continue) -| node [xshift=-1.5cm,yshift=-0.25cm]{No}([xshift=0.5cm]npp.east) |-(start);
+
+\end{tikzpicture}
+\end{document}
+
