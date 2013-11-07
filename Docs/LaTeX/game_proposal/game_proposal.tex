@@ -29,8 +29,9 @@
 \pagenumbering{arabic}
 \section*{Overview \\ \HRule \\[0.4cm] }
 \addcontentsline{toc}{section}{Overview}
-StickMatch is a 3D fighting game for {\it Linux}, {\it Windows}, {\it Xbox},
-and {\it Pandora}.  The goal of the game is to Knock Out [KO] your opponent via
+StickMatch is a 3D fighting game for {\it Linux}, {\it Windows},
+{\it Dreamcast}, {\it Xbox}, and {\it Pandora}.
+The goal of the game is to Knock Out [KO] your opponent via
 a series of punches and kicks.  Initially, there will be a single player mode
 where the player must defeat eight opponents to win the game.  Each opponent
 has a separate {\it stage} which will be themed differently depending on the
@@ -78,11 +79,16 @@ settings for the game (such as the rounds available and stage rotation).
 \path [line] (win) -- node {No}(contleft);
 \path [line] (win) -- node [yshift=-0.5cm] {Yes}(npp);
 \path [line] (contleft) -- node {Yes}(continue);
-\path [line] (contleft) -| node[xshift=-1.5cm,yshift=-0.25cm] {No}([xshift=0.5cm]npp.east) |-(start);
+\path [line] (contleft) -| node[xshift=-1.5cm,yshift=-0.25cm] {No}
+	([xshift=0.5cm]npp.east) |-(start);
 \path [line] (npp) |- (stagen);
-\path [line] (continue) -| node [xshift=1cm,yshift=-0.25cm]{Yes}([xshift=-1.5cm]continue.west) |-(stagen);
-\path [line] (continue) -| node [xshift=-1.5cm,yshift=-0.25cm]{No}([xshift=0.5cm]npp.east) |-(start);
+\path [line] (continue) -| node [xshift=1cm,yshift=-0.25cm]{Yes}
+	([xshift=-1.5cm]continue.west) |-(stagen);
+\path [line] (continue) -| node [xshift=-1.5cm,yshift=-0.25cm]{No}
+	([xshift=0.5cm]npp.east) |-(start);
 
 \end{tikzpicture}
+
+\newpage
 \end{document}
 

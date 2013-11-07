@@ -5,9 +5,9 @@ GITHASHSHORT=`git log --pretty=format:"%h" -1`
 GITDATE=`git log --pretty=format:"%cd" -1`
 GITROLLINGCOUNT=`git log --pretty=format:'' | wc -l`
 GITHEADER=$1
-PROJECT=STICKMATCH
+PROJECT=`echo $2 | awk '{print toupper( $0 )}'`
 
-printf "Generating $PROJECT Git Version Header...\n"
+printf "Generating $2 Git Version Header...\n"
 printf "Revision: $GITROLLINGCOUNT [$GITHASH] $GITDATE\n"
 
 printf "#ifndef __%s_GITVERSION_HPP__\n" $PROJECT > $GITHEADER

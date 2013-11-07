@@ -1,16 +1,18 @@
-#include <GitVersion.hpp>
-#include <Game.hpp>
 #include <iostream>
+#include <Game.hpp>
 
 int main( int p_Argc, char **p_ppArgv )
 {
-	std::cout << "StickMatch [Rev. " << GIT_COMMITHASH  << "]" << std::endl;
+	std::cout << "StickMatch" << std::endl;
 
 	StickMatch::Game TheGame;
-	if( TheGame.Initialise( ) == 0 )
+
+	if( TheGame.Initialise( ) != ZED_OK )
 	{
-		std::cout << "[main] Failed to initialise the game!" << std::endl;
-		return 0;
+		std::cout << "[StickMatch::main] <ERROR> Failed to initialise the "
+			"game" << std::endl;
+
+		return ZED_FAIL;
 	}
 
 	return TheGame.Execute( );

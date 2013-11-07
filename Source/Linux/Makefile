@@ -1,5 +1,5 @@
 ###############################################################################
-#                                    StickMatch Makefile [Linux x86] Ver. 1.0 #
+#                                  StickMatch Makefile [Linux x86] Ver. 1.0 #
 ###############################################################################
 ifndef TOPDIR
 export TOPDIR		:= $(shell cd ../../ && pwd)
@@ -7,9 +7,10 @@ export TOPSRC		= $(TOPDIR)/Source
 export TARGETDIR	= $(TOPDIR)/Bin/$(PLATFORM)/$(ARCH)/$(BITSIZE)
 export OBJSDIR		= $(TOPDIR)/Obj/$(PLATFORM)/$(ARCH)/$(BITSIZE)/GCC/$(GCCVER)/$(BUILD)
 endif
-SOURCEDIR	= Source ../Common/CPP/Source
+SOURCEDIR	= Source ../Common/Source
 
-TARGET := StickMatch
+PROJECT := StickMatch
+TARGET := $(PROJECT)
 OUTFILE	=	$(TARGETDIR)/$(TARGET)_$(GCCVER)
 
 PLATFORM		:= Linux
@@ -63,7 +64,8 @@ CPPFLAGS	=	-c -m$(BITSIZE) -DZED_BUILD_$(BUILD_DEF) \
 				-DZED_PLATFORM_$(BUILD_PLATFORM)_$(BUILD_ARCH) \
 				-DZED_PLATFORM_$(BUILD_PLATFORM)_$(BUILD_ARCH)_$(BITSIZE) \
 				-DZED_BITSIZE_$(BITSIZE) -DZED_ARCH_$(BUILD_ARCH) \
-				-I$(TOPSRC)/Linux/Headers -I$(TOPSRC)/Common/CPP/Headers
+				-DZED_WINDOWSYSTEM_X11 \
+				-I$(TOPSRC)/Linux/Headers -I$(TOPSRC)/Common/Headers
 SYSIPATH	=
 INCPATH		=	-I$(ZEDSDK)/include/Linux
 SYSLPATH	=	
@@ -77,7 +79,7 @@ debug:		BUILD_TYPE	= debug
 debug:		BUILD_DEF	= DEBUG
 debug:		TARGET := $(TARGET)D
 debug:		CPPFLAGS += -g -ggdb -Wall -D_DEBUG $(CPPFLAGS_EXT)
-debug:		LIBS = 
+debug:		LIBS = -lZEDUtilityD -lZEDRendererD -lZEDArithmeticD -lZEDSystemD
 debug:		$(TARGET)
 
 ##### Release #####
@@ -86,7 +88,7 @@ release:	BUILD_TYPE	= release
 release:	BUILD_DEF	= RELEASE
 release:	TARGET := $(TARGET)
 release:	CPPFLAGS += -O3 $(CPPFLAGS_EXT)
-release:	LIBS = 
+release:	LIBS = -lZEDRenderer -lZEDArithmetic -lZEDSystem
 release:	LINKFLAGS += -Wl,-S
 release:	$(TARGET)
 
@@ -96,7 +98,7 @@ profile:	BUILD_TYPE	= profile
 profile:	BUILD_DEF	= PROFILE
 profile:	TARGET := $(TARGET)P
 profile:	CPPFLAGS += -O3 -g -ggdb -Wall -D_DEBUG $(CPPFLAGS_EXT)
-profile:	LIBS =
+profile:	LIBS = -lZEDRendererP -lZEDArithmeticP -lZEDSystemP
 profile:	$(TARGET)
 
 ##### Build the object files while not in the Obj directory ###################
@@ -106,7 +108,7 @@ VERSIONINFO:
 	@printf "%s" "------------------------- Generating Version Information ---"
 	@printf "%s\n" "-------------------"
 	@mkdir -p Headers
-	@sh ./GitVersion.sh ./Headers/GitVersion.hpp
+	@sh ./GitVersion.sh ./Headers/GitVersion.hpp $(PROJECT)
 	@printf "%s" "------------------------------------------------------------"
 	@printf "%s\n" "-------------------"
 
