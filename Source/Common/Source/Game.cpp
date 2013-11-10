@@ -92,6 +92,11 @@ namespace StickMatch
 				CameraVelocity[ 2 ] = THRUST_SPEED;
 			}
 
+			if( m_Keyboard.IsKeyDown( K_SHIFT ) )
+			{
+				CameraVelocity *= 5.0f;
+			}
+
 			if( m_Keyboard.IsKeyDown( 'a' ) )
 			{
 				CameraVelocity[ 0 ] = -STRAFE_SPEED;
@@ -125,22 +130,25 @@ namespace StickMatch
 
 				if( MouseY < HalfHeight )
 				{
-					CameraRotation[ 0 ] = PITCH_SPEED;
+					CameraRotation[ 0 ] += PITCH_SPEED;
 				}
 				if( MouseY > HalfHeight )
 				{
-					CameraRotation[ 0 ] = -PITCH_SPEED;
+					CameraRotation[ 0 ] += -PITCH_SPEED;
 				}
 			}
 
 			m_DebugCamera.Move( CameraVelocity );
-			m_DebugCamera.Rotate( CameraRotation );
+			m_DebugCamera.Rotate( CameraRotation[ 0 ],
+				ZED::Arithmetic::Vector3( 1.0f, 0.0f, 0.0f ) );
+
+			zedTrace( "Camera rot: %f\n", CameraRotation[ 0 ] );
 			
 			this->Update( 16667ULL );
 			this->Render( );
 
 			CameraVelocity.Zero( );
-			CameraRotation.Zero( );
+//			CameraRotation.Zero( );
 			m_pWindow->WarpPointer( HalfWidth, HalfHeight );
 		}
 

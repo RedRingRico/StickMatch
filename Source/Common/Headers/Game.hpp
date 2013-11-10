@@ -9,7 +9,8 @@
 #include <Renderer/Renderer.hpp>
 #include <Renderer/CanvasDescription.hpp>
 #include <Utility/Grid.hpp>
-#include <Renderer/FreeCamera.hpp>
+#include <Utility/FreeCamera.hpp>
+#include <Utility/DollyCamera.hpp>
 
 namespace StickMatch
 {
@@ -36,7 +37,9 @@ namespace StickMatch
 		ZED_BOOL	m_Running;
 
 		ZED::Utility::Grid			m_WorldGrid;
-		ZED::Renderer::FreeCamera	m_DebugCamera;
+		ZED::Utility::FreeCamera	m_DebugCamera;
+
+		ZED::Utility::DollyCamera	m_DollyCamera;
 	};
 }
 
