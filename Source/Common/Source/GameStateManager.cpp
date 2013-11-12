@@ -4,7 +4,7 @@
 
 namespace StickMatch
 {
-	GameStateManager::GameStateManager( )
+	GameStateManager::GameStateManager( ) 
 	{
 	}
 
@@ -18,13 +18,17 @@ namespace StickMatch
 
 	void GameStateManager::Execute( )
 	{
-		m_GameStates.top( )->Update( 0 );
+		m_GameStates.top( )->Update( this, 0 );
 	}
 
 	void GameStateManager::Push( GameState *p_pState )
 	{
-		m_GameStates.top( )->SaveState( );
+		if( !m_GameStates.empty( ) )
+		{
+			m_GameStates.top( )->SaveState( );
+		}
 		m_GameStates.push( p_pState );
+		m_GameStates.top( )->Enter( this, m_GameAttributes );
 	}
 
 	void GameStateManager::Pop( )
@@ -39,12 +43,19 @@ namespace StickMatch
 	void GameStateManager::ChangeState( GameState *p_pState )
 	{
 		// Get the top-most state and swap it
-		if( m_GameStates.top( ) != ZED_NULL )
+		if( !m_GameStates.empty( ) )
 		{
 			m_GameStates.pop( );
 		}
 
 		m_GameStates.push( p_pState );
+		m_GameStates.top( )->Enter( this, m_GameAttributes );
+	}
+
+	void GameStateManager::GameAttributes(
+		const StickMatch::GameAttributes &p_GameAttributes )
+	{
+		m_GameAttributes = p_GameAttributes;
 	}
 }
 

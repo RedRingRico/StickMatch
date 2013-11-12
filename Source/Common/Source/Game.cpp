@@ -2,6 +2,7 @@
 #include <cstring>
 #include <System/Memory.hpp>
 #include <unistd.h>
+#include <IntroductionGameState.hpp>
 
 const ZED_FLOAT32 THRUST_SPEED = 0.2f;
 const ZED_FLOAT32 STRAFE_SPEED = 0.2f;
@@ -66,6 +67,16 @@ namespace StickMatch
 		ZED_UINT32 MouseX = 0, MouseY = 0;
 		m_pWindow->HideCursor( );
 
+		GameAttributes Attribs;
+		Attribs.pInputManager = m_pInputManager;
+		Attribs.pKeyboard = &m_Keyboard;
+		Attribs.pMouse = &m_Mouse;
+		Attribs.pRenderer = m_pRenderer;
+
+		m_StateManager.GameAttributes( Attribs );
+
+		m_StateManager.Push( IntroductionGameState::Instance( ) );
+
 		while( m_Running )
 		{
 			m_pWindow->Update( );
@@ -82,6 +93,8 @@ namespace StickMatch
 			{
 				m_Running = ZED_FALSE;
 			}
+			m_StateManager.Execute( );
+			/*
 
 			if( m_Keyboard.IsKeyDown( 'w' ) )
 			{
@@ -149,7 +162,7 @@ namespace StickMatch
 
 			CameraVelocity.Zero( );
 //			CameraRotation.Zero( );
-			m_pWindow->WarpPointer( HalfWidth, HalfHeight );
+			m_pWindow->WarpPointer( HalfWidth, HalfHeight );*/
 		}
 
 		m_pWindow->ShowCursor( );

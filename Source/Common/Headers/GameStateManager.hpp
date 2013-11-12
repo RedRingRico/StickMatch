@@ -2,6 +2,7 @@
 #define __STICKMATCH_GAMESTATEMANAGER_HPP__
 
 #include <stack>
+#include <GameAttributes.hpp>
 
 namespace StickMatch
 {
@@ -20,8 +21,12 @@ namespace StickMatch
 		
 		void ChangeState( GameState *p_pState );
 
+		void GameAttributes( const GameAttributes &p_GameAttributes );
+
 	private:
 		std::stack< GameState * > m_GameStates;
+
+		StickMatch::GameAttributes	m_GameAttributes;
 	};
 }
 

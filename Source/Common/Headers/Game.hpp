@@ -11,6 +11,8 @@
 #include <Utility/Grid.hpp>
 #include <Utility/FreeCamera.hpp>
 #include <Utility/DollyCamera.hpp>
+#include <GameAttributes.hpp>
+#include <GameStateManager.hpp>
 
 namespace StickMatch
 {
@@ -40,8 +42,10 @@ namespace StickMatch
 		ZED::Utility::FreeCamera	m_DebugCamera;
 
 		ZED::Utility::DollyCamera	m_DollyCamera;
+
+		GameStateManager			m_StateManager;
 	};
 }
 
-#endif
+#endif // __STICKMATCH_GAME_HPP__
 
