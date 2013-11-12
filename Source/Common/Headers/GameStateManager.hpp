@@ -21,12 +21,21 @@ namespace StickMatch
 		
 		void ChangeState( GameState *p_pState );
 
+		void ClearStack( );
+
+		void Quit( ){ this->ClearStack( ); m_Running = ZED_FALSE; }
+
+		ZED_BOOL Running( ) const { return m_Running; }
+
 		void GameAttributes( const GameAttributes &p_GameAttributes );
 
 	private:
 		std::stack< GameState * > m_GameStates;
 
 		StickMatch::GameAttributes	m_GameAttributes;
+		ZED_UINT64	m_StartTime;
+
+		ZED_BOOL	m_Running;
 	};
 }
 

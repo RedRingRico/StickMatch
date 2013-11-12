@@ -1,11 +1,15 @@
 #include <GameStateManager.hpp>
 #include <GameState.hpp>
 #include <System/DataTypes.hpp>
+#include <System/Time.hpp>
 
 namespace StickMatch
 {
 	GameStateManager::GameStateManager( ) 
 	{
+		ZED::System::StartTime( );
+		m_StartTime = ZED::System::GetTimeMiS( );
+		m_Running = ZED_TRUE;
 	}
 
 	GameStateManager::~GameStateManager( )
@@ -18,7 +22,10 @@ namespace StickMatch
 
 	void GameStateManager::Execute( )
 	{
-		m_GameStates.top( )->Update( this, 0 );
+		ZED_UINT64 Current = ZED::System::GetTimeMiS( );
+		ZED_UINT64 Difference = Current - m_StartTime;
+		m_StartTime = Current;
+		m_GameStates.top( )->Update( this, Difference );
 	}
 
 	void GameStateManager::Push( GameState *p_pState )
@@ -36,7 +43,10 @@ namespace StickMatch
 		if( !m_GameStates.empty( ) )
 		{
 			m_GameStates.pop( );
-			m_GameStates.top( )->RestoreState( );
+			if( !m_GameStates.empty( ) )
+			{
+				m_GameStates.top( )->RestoreState( );
+			}
 		}
 	}
 
@@ -50,6 +60,14 @@ namespace StickMatch
 
 		m_GameStates.push( p_pState );
 		m_GameStates.top( )->Enter( this, m_GameAttributes );
+	}
+
+	void GameStateManager::ClearStack( )
+	{
+		while( !m_GameStates.empty( ) )
+		{
+			m_GameStates.pop( );
+		}
 	}
 
 	void GameStateManager::GameAttributes(

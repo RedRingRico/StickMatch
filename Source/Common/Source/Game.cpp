@@ -89,11 +89,17 @@ namespace StickMatch
 				XNextEvent( WindowData.pX11Display, &Event );
 			}
 
-			if( m_Keyboard.IsKeyDown( K_ESCAPE ) )
+			if( m_Keyboard.IsKeyDown( K_ESCAPE ) && m_Keyboard.IsKeyDown( K_ALT ) )
 			{
 				m_Running = ZED_FALSE;
 			}
+
 			m_StateManager.Execute( );
+
+			if( !m_StateManager.Running( ) )
+			{
+				m_Running = ZED_FALSE;
+			}
 			/*
 
 			if( m_Keyboard.IsKeyDown( 'w' ) )

@@ -1,4 +1,5 @@
 #include <IntroductionGameState.hpp>
+#include <System/Debugger.hpp>
 
 namespace StickMatch
 {
@@ -21,6 +22,7 @@ namespace StickMatch
 		const GameAttributes &p_GameAttributes )
 	{
 		m_GameAttributes = p_GameAttributes;
+		m_ElapsedTime = 0ULL;
 
 		m_GameAttributes.pRenderer->ClearColour( 1.0f, 0.0f, 0.0f );
 
@@ -38,9 +40,16 @@ namespace StickMatch
 		m_GameAttributes.pRenderer->BeginScene( ZED_TRUE, ZED_TRUE, ZED_TRUE );
 		m_GameAttributes.pRenderer->EndScene( );
 
-		if( m_ElapsedTime > 1000000ULL )
+		if( m_ElapsedTime >= 1000000ULL )
 		{
+			zedTrace( "Elapsed: %llu\n", m_ElapsedTime );
+			m_ElapsedTime = 0ULL;
 			// p_pManager->ChangeState( MainMenuState::Instance( ) );
+		}
+
+		if( m_GameAttributes.pKeyboard->IsKeyDown( 'q' ) ) 
+		{
+			p_pManager->Quit( );
 		}
 	}
 
