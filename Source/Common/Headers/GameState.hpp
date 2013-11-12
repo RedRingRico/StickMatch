@@ -22,9 +22,12 @@ namespace StickMatch
 		virtual void SaveState( ) = 0;
 		virtual void RestoreState( ) = 0;
 
+		ZED_CHAR8 *Name( ) { return m_pName; }
+
 	protected:
 		GameAttributes	m_GameAttributes;
 		ZED_UINT64		m_ElapsedTime;
+		ZED_CHAR8		*m_pName;
 	};
 }
 

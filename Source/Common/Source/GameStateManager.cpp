@@ -32,9 +32,17 @@ namespace StickMatch
 	{
 		if( !m_GameStates.empty( ) )
 		{
+			zedTrace( "[StickMatch::GameStateManager] Saving state for [%s]\n",
+				m_GameStates.top( )->Name( ) );
+
 			m_GameStates.top( )->SaveState( );
 		}
+
+		zedTrace( "[StickMatch::GameStateManager] Pushing [%s] onto the "
+			"stack\n", p_pState->Name( ) );
+
 		m_GameStates.push( p_pState );
+
 		m_GameStates.top( )->Enter( this, m_GameAttributes );
 	}
 
@@ -42,9 +50,16 @@ namespace StickMatch
 	{
 		if( !m_GameStates.empty( ) )
 		{
+			zedTrace( "[StickMatch::GameStateManager] Popping [%s] from the "
+				"stack\n", m_GameStates.top( )->Name( ) );
+
 			m_GameStates.pop( );
+
 			if( !m_GameStates.empty( ) )
 			{
+				zedTrace( "[StickMatch::GameStateManager] Restoring [%s]'s "
+					"state", m_GameStates.top( )->Name( ) );
+
 				m_GameStates.top( )->RestoreState( );
 			}
 		}
@@ -55,18 +70,17 @@ namespace StickMatch
 		// Get the top-most state and swap it
 		if( !m_GameStates.empty( ) )
 		{
-			m_GameStates.pop( );
+			this->Pop( );
 		}
 
-		m_GameStates.push( p_pState );
-		m_GameStates.top( )->Enter( this, m_GameAttributes );
+		this->Push( p_pState );
 	}
 
 	void GameStateManager::ClearStack( )
 	{
 		while( !m_GameStates.empty( ) )
 		{
-			m_GameStates.pop( );
+			this->Pop( );
 		}
 	}
 

@@ -1,5 +1,8 @@
 #include <IntroductionGameState.hpp>
+#include <MainMenuState.hpp>
 #include <System/Debugger.hpp>
+#include <System/Memory.hpp>
+#include <cstring>
 
 namespace StickMatch
 {
@@ -12,10 +15,17 @@ namespace StickMatch
 
 	IntroductionGameState::IntroductionGameState( )
 	{
+		char Name[ ] = "Introduction";
+		ZED_MEMSIZE NameLength = strlen( Name );
+
+		m_pName = new ZED_CHAR8[ NameLength + 1 ];
+		strncpy( m_pName, Name, NameLength + 1 );
+		m_pName[ NameLength ] = '\0';
 	}
 
 	IntroductionGameState::~IntroductionGameState( )
 	{
+		zedSafeDeleteArray( m_pName );
 	}
 
 	ZED_UINT32 IntroductionGameState::Enter( GameStateManager *p_pManager,
@@ -40,16 +50,12 @@ namespace StickMatch
 		m_GameAttributes.pRenderer->BeginScene( ZED_TRUE, ZED_TRUE, ZED_TRUE );
 		m_GameAttributes.pRenderer->EndScene( );
 
-		if( m_ElapsedTime >= 1000000ULL )
+		if( ( m_ElapsedTime >= 1000000ULL ) ||
+			m_GameAttributes.pKeyboard->IsKeyDown( K_ESCAPE ) )
 		{
 			zedTrace( "Elapsed: %llu\n", m_ElapsedTime );
 			m_ElapsedTime = 0ULL;
-			// p_pManager->ChangeState( MainMenuState::Instance( ) );
-		}
-
-		if( m_GameAttributes.pKeyboard->IsKeyDown( 'q' ) ) 
-		{
-			p_pManager->Quit( );
+			p_pManager->ChangeState( MainMenuState::Instance( ) );
 		}
 	}
 
