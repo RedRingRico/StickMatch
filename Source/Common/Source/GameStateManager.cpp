@@ -22,10 +22,19 @@ namespace StickMatch
 
 	void GameStateManager::Execute( )
 	{
-		ZED_UINT64 Current = ZED::System::GetTimeMiS( );
-		ZED_UINT64 Difference = Current - m_StartTime;
-		m_StartTime = Current;
-		m_GameStates.top( )->Update( this, Difference );
+		if( m_GameStates.empty( ) )
+		{
+			zedTrace( "[StickMatch::GameStateManager] "
+				"Game state stack is empty.  Quitting...\n" );
+			this->Quit( );
+		}
+		else
+		{
+			ZED_UINT64 Current = ZED::System::GetTimeMiS( );
+			ZED_UINT64 Difference = Current - m_StartTime;
+			m_StartTime = Current;
+			m_GameStates.top( )->Update( this, Difference );
+		}
 	}
 
 	void GameStateManager::Push( GameState *p_pState )

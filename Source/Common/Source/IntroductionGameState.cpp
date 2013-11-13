@@ -41,6 +41,7 @@ namespace StickMatch
 
 	void IntroductionGameState::Exit( GameStateManager *p_pManager )
 	{
+		p_pManager->Pop( );
 	}
 
 	void IntroductionGameState::Update( GameStateManager *p_pManager,
