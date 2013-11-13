@@ -34,7 +34,7 @@ namespace StickMatch
 	{
 		m_GameAttributes = p_GameAttributes;
 
-		m_GameAttributes.pRenderer->ClearColour( 0.0f, 0.0f, 1.0f );
+		m_GameAttributes.pRenderer->ClearColour( 0.14f, 0.0f, 0.14f );
 
 		m_GameAttributes.pKeyboard->AllKeysUp( );
 
