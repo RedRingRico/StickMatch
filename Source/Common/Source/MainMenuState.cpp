@@ -27,6 +27,8 @@ namespace StickMatch
 
 		m_GameAttributes.pRenderer->ClearColour( 0.0f, 1.0f, 0.0f );
 
+		m_GameAttributes.pKeyboard->AllKeysUp( );
+
 		return ZED_OK;
 	}
 
