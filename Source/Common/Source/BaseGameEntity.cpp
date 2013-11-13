@@ -65,5 +65,22 @@ namespace StickMatch
 #undef DO8
 #undef DO16
 	}
+
+	ZED_UINT32 BaseGameEntity::Renderer( ZED::Renderer::Renderer *p_pRenderer )
+	{
+		if( p_pRenderer )
+		{
+			m_pRenderer = p_pRenderer;
+
+			return ZED_OK;
+		}
+
+		return ZED_FAIL;
+	}
+
+	ZED_UINT32 BaseGameEntity::LoadModel( const ZED_CHAR8 *p_pFileName )
+	{
+		return m_pModel->Load( p_pFileName );
+	}
 }
 
