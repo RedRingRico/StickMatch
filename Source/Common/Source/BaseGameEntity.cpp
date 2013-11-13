@@ -8,6 +8,7 @@ namespace StickMatch
 	BaseGameEntity::~BaseGameEntity( )
 	{
 		zedSafeDeleteArray( m_pName );
+		zedSafeDelete( m_pModel );
 	}
 
 	ZED_UINT32 BaseGameEntity::ID( const ZED_CHAR8 *p_pName )

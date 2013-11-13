@@ -22,7 +22,6 @@ namespace StickMatch
 		virtual void Render( );
 
 	protected:
-		ZED::Renderer::Model	*m_pModel;
 	};
 }
 
