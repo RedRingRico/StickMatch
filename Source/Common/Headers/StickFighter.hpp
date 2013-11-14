@@ -21,7 +21,12 @@ namespace StickMatch
 
 		virtual void Render( );
 
+		ZED_UINT32 Character( const ZED_UINT32 p_Character );
+
+		void Type( const ZED_UINT32 p_Type ) { m_Type = p_Type; }
+
 	protected:
+		ZED_UINT32	m_Type;
 	};
 }
 

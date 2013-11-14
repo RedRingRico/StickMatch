@@ -2,6 +2,8 @@
 #define __STICKMATCH_GAMEPLAYSTATE_HPP__
 
 #include <GameState.hpp>
+#include <BaseGameEntity.hpp>
+#include <vector>
 
 namespace StickMatch
 {
@@ -22,8 +24,17 @@ namespace StickMatch
 		virtual void RestoreState( );
 
 		static GameplayState *Instance( );
+		
+		// When at the lobby screen, the characters will be set before the game
+		// commences.  The first parameter is the character selected at the
+		// selection screen, the second parameter is the type of character (AI,
+		// local human, remote human), and the third is whether this character
+		// is assigned to slot one or two
+		ZED_UINT32 AssignCharacter( const ZED_UINT32 p_CharacterTypeID,
+			const ZED_UINT32 p_Type, const ZED_UINT32 p_Slot );
 	
 	private:
+		std::vector< BaseGameEntity * > m_Entities;
 	};
 }
 

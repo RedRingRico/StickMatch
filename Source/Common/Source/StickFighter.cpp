@@ -24,5 +24,10 @@ namespace StickMatch
 	{
 		m_pModel->Render( );
 	}
+
+	ZED_UINT32 StickFighter::Character( const ZED_UINT32 p_Character )
+	{
+		return ZED_FAIL;
+	}
 }
 

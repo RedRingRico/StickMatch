@@ -5,21 +5,12 @@
 
 namespace StickMatch
 {
-	BaseGameEntity::~BaseGameEntity( )
-	{
-		zedSafeDeleteArray( m_pName );
-		zedSafeDelete( m_pModel );
-	}
-
-	ZED_UINT32 BaseGameEntity::ID( const ZED_CHAR8 *p_pName )
+	ZED_UINT32 GenerateGameEntityID( const ZED_CHAR8 *p_pName )
 	{
 		if( p_pName == ZED_NULL )
 		{
 			return ZED_FAIL;
 		}
-
-		ZED_MEMSIZE NameLength = strlen( p_pName );
-		m_pName = new ZED_CHAR8 [ NameLength ];
 		
 		const ZED_UINT32 Base = 65521;
 		const ZED_UINT32 Max = 5552;
@@ -65,6 +56,28 @@ namespace StickMatch
 #undef DO4
 #undef DO8
 #undef DO16
+
+	}
+
+	BaseGameEntity::~BaseGameEntity( )
+	{
+		zedSafeDeleteArray( m_pName );
+		zedSafeDelete( m_pModel );
+	}
+
+	ZED_UINT32 BaseGameEntity::ID( const ZED_CHAR8 *p_pName )
+	{
+		if( p_pName == ZED_NULL )
+		{
+			return ZED_FAIL;
+		}
+
+		ZED_MEMSIZE NameLength = strlen( p_pName );
+		m_pName = new ZED_CHAR8 [ NameLength + 1 ];
+		strncpy( m_pName, p_pName, NameLength );
+		m_pName[ NameLength ] = '\0';
+
+		return GenerateGameEntityID( p_pName );
 	}
 
 	ZED_UINT32 BaseGameEntity::Renderer( ZED::Renderer::Renderer *p_pRenderer )
