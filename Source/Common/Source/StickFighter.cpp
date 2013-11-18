@@ -15,6 +15,10 @@ namespace StickMatch
 			m_pModel = ZED_NULL;
 		}
 	}
+/*
+	ZED_UINT32 StickFighter::Initialise( )
+	{
+	}*/
 
 	void StickFighter::Update( const ZED_UINT64 p_ElapsedTime )
 	{

@@ -3,6 +3,7 @@
 
 #include <GameState.hpp>
 #include <BaseGameEntity.hpp>
+#include <System/EventRouter.hpp>
 #include <vector>
 
 namespace StickMatch
@@ -35,6 +36,7 @@ namespace StickMatch
 	
 	private:
 		std::vector< BaseGameEntity * > m_Entities;
+		ZED::System::EventRouter		*m_pEventRouter;
 	};
 }
 

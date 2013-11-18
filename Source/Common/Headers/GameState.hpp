@@ -4,6 +4,8 @@
 #include <GameStateManager.hpp>
 #include <GameAttributes.hpp>
 #include <System/DataTypes.hpp>
+#include <System/Event.hpp>
+#include <vector>
 
 namespace StickMatch
 {
@@ -28,6 +30,8 @@ namespace StickMatch
 		GameAttributes	m_GameAttributes;
 		ZED_UINT64		m_ElapsedTime;
 		ZED_CHAR8		*m_pName;
+		
+		std::vector< ZED::System::EventListener > m_EventListeners;
 	};
 }
 

@@ -17,6 +17,8 @@ namespace StickMatch
 			return ZED_FAIL;
 		}
 
+		// This should try to create a renderer for OGL 3-1, depending on the
+		// platform's GPU
 		m_pRenderer = new ZED::Renderer::LinuxRendererOGL3( );
 
 		if( !m_pRenderer )

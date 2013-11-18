@@ -56,7 +56,6 @@ namespace StickMatch
 #undef DO4
 #undef DO8
 #undef DO16
-
 	}
 
 	BaseGameEntity::~BaseGameEntity( )
