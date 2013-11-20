@@ -13,10 +13,13 @@ namespace StickMatch
 		m_pName = new ZED_CHAR8[ NameLength + 1 ];
 		strncpy( m_pName, Name, NameLength + 1 );
 		m_pName[ NameLength ] = '\0';
+
+		m_pEventRouter = ZED_NULL;
 	}
 
 	MainMenuState::~MainMenuState( )
 	{
+		zedSafeDelete( m_pEventRouter );
 		zedSafeDeleteArray( m_pName );
 	}
 
@@ -28,6 +31,9 @@ namespace StickMatch
 		m_GameAttributes.pRenderer->ClearColour( 0.0f, 1.0f, 0.0f );
 
 		m_GameAttributes.pKeyboard->AllKeysUp( );
+
+		m_pEventRouter = new ZED::Utility::EventRouter( "Main Menu Events",
+			ZED_TRUE, 2 );
 
 		return ZED_OK;
 	}

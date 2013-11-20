@@ -23,6 +23,8 @@ namespace StickMatch
 		m_pName[ NameLength ] = '\0';
 
 		m_ElapsedTime = 0ULL;
+
+		m_pEventRouter = ZED_NULL;
 	}
 
 	GameplayState::~GameplayState( )
@@ -38,6 +40,9 @@ namespace StickMatch
 		m_GameAttributes.pRenderer->ClearColour( 0.14f, 0.0f, 0.14f );
 
 		m_GameAttributes.pKeyboard->AllKeysUp( );
+
+		m_pEventRouter =
+			new ZED::Utility::EventRouter( "Gameplay Events", ZED_TRUE, 2 );
 
 		return ZED_OK;
 	}

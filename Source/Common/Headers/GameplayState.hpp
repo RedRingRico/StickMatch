@@ -3,7 +3,7 @@
 
 #include <GameState.hpp>
 #include <BaseGameEntity.hpp>
-#include <System/EventRouter.hpp>
+#include <Utility/EventRouter.hpp>
 #include <vector>
 
 namespace StickMatch
@@ -33,10 +33,12 @@ namespace StickMatch
 		// is assigned to slot one or two
 		ZED_UINT32 AssignCharacter( const ZED_UINT32 p_CharacterTypeID,
 			const ZED_UINT32 p_Type, const ZED_UINT32 p_Slot );
+
+		ZED::Utility::EventRouter *EventRouter( ) { return m_pEventRouter; }
 	
 	private:
 		std::vector< BaseGameEntity * > m_Entities;
-		ZED::System::EventRouter		*m_pEventRouter;
+		ZED::Utility::EventRouter		*m_pEventRouter;
 	};
 }
 

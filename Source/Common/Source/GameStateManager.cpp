@@ -10,6 +10,7 @@ namespace StickMatch
 		ZED::System::StartTime( );
 		m_StartTime = ZED::System::GetTimeMiS( );
 		m_Running = ZED_TRUE;
+		m_pEventRouter = ZED_NULL;
 	}
 
 	GameStateManager::~GameStateManager( )
@@ -53,6 +54,7 @@ namespace StickMatch
 		m_GameStates.push( p_pState );
 
 		m_GameStates.top( )->Enter( this, m_GameAttributes );
+		m_pEventRouter = m_GameStates.top( )->EventRouter( );
 	}
 
 	void GameStateManager::Pop( )

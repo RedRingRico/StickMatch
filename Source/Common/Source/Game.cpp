@@ -3,6 +3,7 @@
 #include <System/Memory.hpp>
 #include <unistd.h>
 #include <IntroductionGameState.hpp>
+#include <Events.hpp>
 
 const ZED_FLOAT32 THRUST_SPEED = 0.2f;
 const ZED_FLOAT32 STRAFE_SPEED = 0.2f;
@@ -88,6 +89,10 @@ namespace StickMatch
 			{
 				XNextEvent( WindowData.pX11Display, &Event );
 			}
+
+			ZED::Utility::Event Keyboard( g_InputEvent.Name( ) );
+
+			m_StateManager.EventRouter( )->Send( Keyboard );
 
 			if( m_Keyboard.IsKeyDown( K_ESCAPE ) && m_Keyboard.IsKeyDown( K_ALT ) )
 			{

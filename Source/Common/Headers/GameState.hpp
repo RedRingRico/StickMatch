@@ -4,7 +4,7 @@
 #include <GameStateManager.hpp>
 #include <GameAttributes.hpp>
 #include <System/DataTypes.hpp>
-#include <System/Event.hpp>
+#include <Utility/Event.hpp>
 #include <vector>
 
 namespace StickMatch
@@ -26,12 +26,15 @@ namespace StickMatch
 
 		ZED_CHAR8 *Name( ) { return m_pName; }
 
+		ZED::Utility::EventRouter *EventRouter( ) { return m_pEventRouter; }
+
 	protected:
 		GameAttributes	m_GameAttributes;
 		ZED_UINT64		m_ElapsedTime;
 		ZED_CHAR8		*m_pName;
 		
-		std::vector< ZED::System::EventListener > m_EventListeners;
+		std::vector< ZED::Utility::EventListener > m_EventListeners;
+		ZED::Utility::EventRouter	*m_pEventRouter;
 	};
 }
 

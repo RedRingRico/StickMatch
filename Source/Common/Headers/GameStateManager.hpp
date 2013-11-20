@@ -3,6 +3,7 @@
 
 #include <stack>
 #include <GameAttributes.hpp>
+#include <Utility/EventRouter.hpp>
 
 namespace StickMatch
 {
@@ -29,6 +30,8 @@ namespace StickMatch
 
 		void GameAttributes( const GameAttributes &p_GameAttributes );
 
+		ZED::Utility::EventRouter *EventRouter( ) { return m_pEventRouter; }
+
 	private:
 		std::stack< GameState * > m_GameStates;
 
@@ -36,6 +39,8 @@ namespace StickMatch
 		ZED_UINT64	m_StartTime;
 
 		ZED_BOOL	m_Running;
+
+		ZED::Utility::EventRouter		*m_pEventRouter;
 	};
 }
 
