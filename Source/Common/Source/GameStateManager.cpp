@@ -72,6 +72,7 @@ namespace StickMatch
 					"state", m_GameStates.top( )->Name( ) );
 
 				m_GameStates.top( )->RestoreState( );
+				m_pEventRouter = m_GameStates.top( )->EventRouter( );
 			}
 		}
 	}

@@ -34,11 +34,8 @@ namespace StickMatch
 		ZED_UINT32 AssignCharacter( const ZED_UINT32 p_CharacterTypeID,
 			const ZED_UINT32 p_Type, const ZED_UINT32 p_Slot );
 
-		ZED::Utility::EventRouter *EventRouter( ) { return m_pEventRouter; }
-	
 	private:
 		std::vector< BaseGameEntity * > m_Entities;
-		ZED::Utility::EventRouter		*m_pEventRouter;
 	};
 }
 

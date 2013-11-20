@@ -29,6 +29,7 @@ namespace StickMatch
 
 	GameplayState::~GameplayState( )
 	{
+		zedSafeDelete( m_pEventRouter );
 		zedSafeDeleteArray( m_pName );
 	}
 
