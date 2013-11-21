@@ -90,11 +90,16 @@ namespace StickMatch
 				XNextEvent( WindowData.pX11Display, &Event );
 			}
 
-			ZED::Utility::Event Keyboard( g_InputEvent.Name( ) );
+			ZED_KEYBOARDSTATE KeyboardState;
+			m_Keyboard.State( &KeyboardState );
+			KeyboardInputEventData KeyboardData;
+			KeyboardData.State( &KeyboardState );
+			KeyboardEvent Keyboard( &KeyboardData );
 
 			m_StateManager.EventRouter( )->Send( Keyboard );
 
-			if( m_Keyboard.IsKeyDown( K_ESCAPE ) && m_Keyboard.IsKeyDown( K_ALT ) )
+			if( m_Keyboard.IsKeyDown( K_ESCAPE ) &&
+				m_Keyboard.IsKeyDown( K_ALT ) )
 			{
 				m_Running = ZED_FALSE;
 			}

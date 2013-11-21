@@ -1,19 +1,31 @@
 #include <Events.hpp>
+#include <System/Memory.hpp>
 
 namespace StickMatch
 {
-	InputEventListener::InputEventListener( )
+	KeyboardInputEventData::KeyboardInputEventData( )
 	{
 	}
 
-	InputEventListener::~InputEventListener( )
+	KeyboardInputEventData::~KeyboardInputEventData( )
 	{
 	}
 
-	ZED_BOOL InputEventListener::HandleEvent(
-		const ZED::Utility::Event &p_Event )
+	KeyboardEvent::KeyboardEvent( KeyboardInputEventData *p_pData,
+		ZED_FLOAT32 p_DispatchTime ) :
+		ZED::Utility::Event( KeyboardInputEvent.Name( ), p_pData,
+			p_DispatchTime )
 	{
-		return ZED_OK;
+		m_pData = &m_Keyboard;
+	}
+
+	KeyboardEvent::~KeyboardEvent( )
+	{
+	}
+
+	void KeyboardEvent::State( const ZED_KEYBOARDSTATE *p_pData )
+	{
+		m_Keyboard.State( p_pData );
 	}
 }
 

@@ -2,30 +2,40 @@
 #define __STICKMATCH_EVENTS_HPP__
 
 #include <Utility/Event.hpp>
+#include <System/InputTypes.hpp>
 
 namespace StickMatch
 {
-	const ZED::Utility::EventType g_InputEvent( "InputEvent" );
+	const ZED::Utility::EventType KeyboardInputEvent( "Keyboard Input" );
 
-	class InputEventData : public ZED::Utility::EventData
+	class KeyboardInputEventData : public ZED::Utility::EventData
 	{
 	public:
-		InputEventData( );
-		virtual ~InputEventData( );
+		KeyboardInputEventData( );
+		virtual ~KeyboardInputEventData( );
 
-		ZED_UINT32	Type;
-		void		*Value;
+		ZED_KEYBOARDSTATE State( ) const
+			{ return m_State; }
+
+		void State( const ZED_KEYBOARDSTATE *p_pState )
+			{ m_State = ( *p_pState ); }
+
+	private:
+		ZED_KEYBOARDSTATE	m_State;
 	};
 
-	class InputEventListener : public ZED::Utility::EventListener
+	class KeyboardEvent : public ZED::Utility::Event
 	{
 	public:
-		InputEventListener( );
-		virtual ~InputEventListener( );
+		ZED_EXPLICIT KeyboardEvent(
+			KeyboardInputEventData *p_pData = ZED_NULL,
+			ZED_FLOAT32 p_DispatchTiem = ZED::System::GetTimeMiS( ) );
+		virtual ~KeyboardEvent( );
 
-		virtual ZED_BOOL HandleEvent( const ZED::Utility::Event &p_Event );
+		void State( const ZED_KEYBOARDSTATE *p_pData );
 
-		virtual ZED_CHAR8 *Name( ) const { return "a";}//g_InputEventName; }
+	private:
+		KeyboardInputEventData	m_Keyboard;
 	};
 }
 

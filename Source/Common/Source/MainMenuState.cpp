@@ -1,6 +1,8 @@
 #include <MainMenuState.hpp>
 #include <GameplayState.hpp>
 #include <System/Memory.hpp>
+#include <Events.hpp>
+#include <MainMenuEvents.hpp>
 #include <cstring>
 
 namespace StickMatch
@@ -34,6 +36,8 @@ namespace StickMatch
 
 		m_pEventRouter = new ZED::Utility::EventRouter( "Main Menu Events",
 			ZED_TRUE, 2 );
+
+		m_pEventRouter->Add( new InputListener( ), KeyboardInputEvent );
 
 		return ZED_OK;
 	}
