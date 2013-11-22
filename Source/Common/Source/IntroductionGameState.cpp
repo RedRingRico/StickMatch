@@ -52,6 +52,10 @@ namespace StickMatch
 		p_pManager->Pop( );
 	}
 
+	void IntroductionGameState::Render( )
+	{
+	}
+
 	void IntroductionGameState::Update( GameStateManager *p_pManager,
 		const ZED_UINT64 p_MicroSeconds )
 	{

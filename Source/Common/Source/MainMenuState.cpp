@@ -47,6 +47,10 @@ namespace StickMatch
 		p_pManager->Pop( );
 	}
 
+	void MainMenuState::Render( )
+	{
+	}
+
 	void MainMenuState::Update( GameStateManager *p_pManager,
 		const ZED_UINT64 p_MicroSeconds )
 	{

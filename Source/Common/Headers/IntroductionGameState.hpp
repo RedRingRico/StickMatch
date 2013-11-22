@@ -14,6 +14,8 @@ namespace StickMatch
 		virtual ZED_UINT32 Enter( GameStateManager *p_pManager,
 			const GameAttributes &p_GameAttributes );
 		virtual void Exit( GameStateManager *p_pManager );
+
+		virtual void Render( );
 		
 		virtual void Update( GameStateManager *p_pManager,
 			const ZED_UINT64 p_MicroSeconds );

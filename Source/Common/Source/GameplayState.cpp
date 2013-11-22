@@ -38,7 +38,7 @@ namespace StickMatch
 	{
 		m_GameAttributes = p_GameAttributes;
 
-		m_GameAttributes.pRenderer->ClearColour( 0.14f, 0.0f, 0.14f );
+		m_GameAttributes.pRenderer->ClearColour( 0.12f, 0.0f, 0.12f );
 
 		m_GameAttributes.pKeyboard->AllKeysUp( );
 
@@ -51,6 +51,10 @@ namespace StickMatch
 	void GameplayState::Exit( GameStateManager *p_pManager )
 	{
 		p_pManager->Pop( );
+	}
+
+	void GameplayState::Render( )
+	{
 	}
 
 	void GameplayState::Update( GameStateManager *p_pManager,

@@ -110,95 +110,11 @@ namespace StickMatch
 			{
 				m_Running = ZED_FALSE;
 			}
-			/*
-
-			if( m_Keyboard.IsKeyDown( 'w' ) )
-			{
-				CameraVelocity[ 2 ] = -THRUST_SPEED;
-			}
-			if( m_Keyboard.IsKeyDown( 's' ) )
-			{
-				CameraVelocity[ 2 ] = THRUST_SPEED;
-			}
-
-			if( m_Keyboard.IsKeyDown( K_SHIFT ) )
-			{
-				CameraVelocity *= 5.0f;
-			}
-
-			if( m_Keyboard.IsKeyDown( 'a' ) )
-			{
-				CameraVelocity[ 0 ] = -STRAFE_SPEED;
-			}
-			if( m_Keyboard.IsKeyDown( 'd' ) )
-			{
-				CameraVelocity[ 0 ] = STRAFE_SPEED;
-			}
-
-			if( m_Mouse.IsButtonDown( ZED_MOUSE_BUTTON_4 ) )
-			{
-				CameraVelocity[ 1 ] = ELEVATE_SPEED;
-			}
-			if( m_Mouse.IsButtonDown( ZED_MOUSE_BUTTON_5 ) )
-			{
-				CameraVelocity[ 1 ] = -ELEVATE_SPEED;
-			}
-
-			m_Mouse.Position( &MouseX, &MouseY );
-
-			if( m_Mouse.IsButtonDown( ZED_MOUSE_BUTTON_2 ) )
-			{
-				if( MouseX < HalfWidth )
-				{
-					CameraRotation[ 1 ] = YAW_SPEED;
-				}
-				if( MouseX > HalfWidth )
-				{
-					CameraRotation[ 1 ] = -YAW_SPEED;
-				}
-
-				if( MouseY < HalfHeight )
-				{
-					CameraRotation[ 0 ] += PITCH_SPEED;
-				}
-				if( MouseY > HalfHeight )
-				{
-					CameraRotation[ 0 ] += -PITCH_SPEED;
-				}
-			}
-
-			m_DebugCamera.Move( CameraVelocity );
-			m_DebugCamera.Rotate( CameraRotation[ 0 ],
-				ZED::Arithmetic::Vector3( 1.0f, 0.0f, 0.0f ) );
-
-			zedTrace( "Camera rot: %f\n", CameraRotation[ 0 ] );
-			
-			this->Update( 16667ULL );
-			this->Render( );
-
-			CameraVelocity.Zero( );
-//			CameraRotation.Zero( );
-			m_pWindow->WarpPointer( HalfWidth, HalfHeight );*/
 		}
 
 		m_pWindow->ShowCursor( );
 
 		return ZED_OK;
-	}
-
-	void Game::Update( const ZED_UINT64 p_MicroSeconds )
-	{
-	}
-
-	void Game::Render( )
-	{
-		ZED::Arithmetic::Matrix4x4	ProjectionView, Projection, View;
-		m_DebugCamera.Projection( &Projection );
-		m_DebugCamera.View( &View );
-		ProjectionView = Projection*View;
-		m_pRenderer->BeginScene( ZED_TRUE, ZED_TRUE, ZED_TRUE );
-		m_WorldGrid.Render( &ProjectionView );
-		m_pRenderer->EndScene( );
 	}
 }
 

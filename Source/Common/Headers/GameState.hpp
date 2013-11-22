@@ -21,6 +21,8 @@ namespace StickMatch
 		virtual void Update( GameStateManager *p_pManager,
 			const ZED_UINT64 p_MicroSeconds ) = 0;
 
+		virtual void Render( ) = 0;
+
 		virtual void SaveState( ) = 0;
 		virtual void RestoreState( ) = 0;
 

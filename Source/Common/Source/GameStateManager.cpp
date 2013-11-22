@@ -34,6 +34,7 @@ namespace StickMatch
 			ZED_UINT64 Current = ZED::System::GetTimeMiS( );
 			ZED_UINT64 Difference = Current - m_StartTime;
 			m_StartTime = Current;
+			m_GameStates.top( )->Render( );
 			m_GameStates.top( )->Update( this, Difference );
 		}
 	}
