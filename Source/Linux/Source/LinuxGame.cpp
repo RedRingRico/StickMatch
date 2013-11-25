@@ -29,7 +29,7 @@ namespace StickMatch
 			return ZED_FAIL;
 		}
 
-		ZED_UINT32 X = 1920, Y = 0, Width = 1280, Height = 720;
+		ZED_UINT32 X = 0, Y = 0, Width = 1280, Height = 720;
 		ZED_UINT32 WindowStyle = ZED_WINDOW_STYLE_MINIMISE |
 			ZED_WINDOW_STYLE_CLOSE | ZED_WINDOW_STYLE_TITLEBAR |
 			ZED_WINDOW_STYLE_MOVE;
@@ -70,6 +70,8 @@ namespace StickMatch
 		{
 			zedTrace( "[StickMatch::Game::Initialise] <ERROR> "
 				"Failed to create new input manager\n" );
+
+			return ZED_FAIL;
 		}
 
 		m_pInputManager->AddDevice( &m_Keyboard );
