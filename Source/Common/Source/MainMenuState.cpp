@@ -37,7 +37,7 @@ namespace StickMatch
 		m_pEventRouter = new ZED::Utility::EventRouter( "Main Menu Events",
 			ZED_TRUE, 2 );
 
-		m_pEventRouter->Add( new InputListener( ), KeyboardInputEvent );
+		m_pEventRouter->Add( new InputListener( ), KeyboardInputEventType );
 
 		return ZED_OK;
 	}

@@ -74,7 +74,7 @@ namespace StickMatch
 
 		if( m_ElapsedTime > 1000000ULL )
 		{
-			zedTrace( "Updated: %d times\n", Counter );
+			zedTrace( "Updated: %u times\n", Counter );
 
 			m_ElapsedTime = 0ULL;
 			Counter = 0;

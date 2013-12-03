@@ -78,6 +78,11 @@ namespace StickMatch
 
 		m_StateManager.Push( IntroductionGameState::Instance( ) );
 
+		ZED_KEYBOARDSTATE OldKeyboardState;
+		memset( &OldKeyboardState, 0, sizeof( OldKeyboardState ) );
+		ZED_MEMSIZE KeyCount =
+			sizeof( OldKeyboardState ) / sizeof( OldKeyboardState.Key[ 0 ] );
+
 		while( m_Running )
 		{
 			m_pWindow->Update( );
@@ -92,11 +97,18 @@ namespace StickMatch
 
 			ZED_KEYBOARDSTATE KeyboardState;
 			m_Keyboard.State( &KeyboardState );
-			KeyboardInputEventData KeyboardData;
-			KeyboardData.State( &KeyboardState );
-			KeyboardEvent Keyboard( &KeyboardData );
 
-			m_StateManager.EventRouter( )->Send( Keyboard );
+			for( ZED_MEMSIZE i = 0; i < KeyCount; ++i )
+			{
+				if( KeyboardState.Key[ i ] != OldKeyboardState.Key[ i ] )
+				{
+					KeyboardInputEventData KeyboardData;
+					KeyboardData.State( i, KeyboardState.Key[ i ] );
+					KeyboardEvent Keyboard( &KeyboardData );
+
+					m_StateManager.EventRouter( )->Send( Keyboard );
+				}
+			}
 
 			if( m_Keyboard.IsKeyDown( K_ESCAPE ) &&
 				m_Keyboard.IsKeyDown( K_ALT ) )
@@ -110,6 +122,8 @@ namespace StickMatch
 			{
 				m_Running = ZED_FALSE;
 			}
+
+			OldKeyboardState = KeyboardState;
 		}
 
 		m_pWindow->ShowCursor( );
