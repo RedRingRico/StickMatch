@@ -3,6 +3,7 @@
 #include <System/Memory.hpp>
 #include <StickFighter.hpp>
 #include <InputBinder.hpp>
+#include <Events.hpp>
 #include <GameplayEvents.hpp>
 #include <cstring>
 
@@ -27,12 +28,13 @@ namespace StickMatch
 		m_ElapsedTime = 0ULL;
 
 		m_pEventRouter = ZED_NULL;
-
 		m_pInputBinder = new InputBinder( );
+		m_pInputListener = new GameplayInputListener( );
 	}
 
 	GameplayState::~GameplayState( )
 	{
+		zedSafeDelete( m_pEventRouter );
 		zedSafeDelete( m_pEventRouter );
 		zedSafeDeleteArray( m_pName );
 	}
@@ -52,6 +54,9 @@ namespace StickMatch
 		m_pInputBinder->BindKey( 'w', MOVE_UP );
 
 		p_pManager->BindInput( m_pInputBinder );
+
+		m_pEventRouter->Add( m_pInputListener, MoveEventType );
+		m_pEventRouter->Add( m_pInputListener, SemanticInputEventType );
 
 		return ZED_OK;
 	}

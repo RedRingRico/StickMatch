@@ -3,7 +3,6 @@
 
 #include <Utility/Event.hpp>
 #include <System/InputTypes.hpp>
-#include <System/Debugger.hpp>
 
 namespace StickMatch
 {

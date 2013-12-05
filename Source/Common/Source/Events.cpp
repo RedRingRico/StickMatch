@@ -15,12 +15,8 @@ namespace StickMatch
 	ZED_UINT32 KeyboardInputEventData::GetState( ZED_BYTE &p_Key,
 		ZED_BOOL &p_State ) const
 	{
-		zedTrace( "Getter\n" );
-
 		p_Key = m_Key;
 		p_State = m_State;
-
-		zedTrace( "p_Key: %c | p_State: %d\n", p_Key, p_State );
 
 		return ZED_OK;
 	}
@@ -28,12 +24,8 @@ namespace StickMatch
 	void KeyboardInputEventData::SetState( const ZED_BYTE p_Key,
 		const ZED_BOOL p_State )
 	{
-		zedTrace( "Setter\n" );
-
 		m_Key = p_Key;
 		m_State = p_State;
-
-		zedTrace( "m_Key: %c | m_State: %d\n", m_Key, m_State );
 	}
 
 	KeyboardEvent::KeyboardEvent( KeyboardInputEventData *p_pData,
