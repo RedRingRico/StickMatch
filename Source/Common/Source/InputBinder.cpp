@@ -1,9 +1,11 @@
 #include <InputBinder.hpp>
+#include <System/Debugger.hpp>
 
 namespace StickMatch
 {
 	InputBinder::InputBinder( )
 	{
+		m_Key.clear( );
 	}
 
 	InputBinder::~InputBinder( )
@@ -26,6 +28,10 @@ namespace StickMatch
 
 	ZED_UINT32 InputBinder::Key( const ZED_BYTE p_Key )
 	{
+		if( m_Key.empty( ) )
+		{
+			return 0;
+		}
 		KeyMap::const_iterator Itr = m_Key.find( p_Key );
 
 		if( Itr == m_Key.end( ) )

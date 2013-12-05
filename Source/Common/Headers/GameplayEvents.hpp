@@ -6,8 +6,8 @@
 
 namespace StickMatch
 {
-	const ZED_UINT32 MOVE_FORWARD	= 1;
-	const ZED_UINT32 MOVE_BACKWARD	= 2;
+	const ZED_UINT32 MOVE_UP		= 1;
+	const ZED_UINT32 MOVE_DOWN		= 2;
 	const ZED_UINT32 MOVE_LEFT		= 3;
 	const ZED_UINT32 MOVE_RIGHT		= 4;
 	const ZED_UINT32 ACTION_KICK	= 5;

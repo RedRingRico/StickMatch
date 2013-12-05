@@ -103,7 +103,7 @@ namespace StickMatch
 				if( KeyboardState.Key[ i ] != OldKeyboardState.Key[ i ] )
 				{
 					KeyboardInputEventData KeyboardData;
-					KeyboardData.State( i, KeyboardState.Key[ i ] );
+					KeyboardData.SetState( i, KeyboardState.Key[ i ] );
 					KeyboardEvent Keyboard( &KeyboardData );
 
 					m_StateManager.EventRouter( )->Send( Keyboard );

@@ -3,6 +3,7 @@
 
 #include <Utility/Event.hpp>
 #include <System/InputTypes.hpp>
+#include <System/Debugger.hpp>
 
 namespace StickMatch
 {
@@ -15,11 +16,9 @@ namespace StickMatch
 		KeyboardInputEventData( );
 		virtual ~KeyboardInputEventData( );
 
-		ZED_UINT32 State( ZED_BYTE p_Key, ZED_BOOL p_State ) const
-			{ p_Key = m_Key; p_State = m_State; return ZED_OK; }
+		ZED_UINT32 GetState( ZED_BYTE &p_Key, ZED_BOOL &p_State ) const;
 
-		void State( const ZED_BYTE p_Key, const ZED_BOOL p_State )
-			{ m_Key = p_Key; m_State = p_State; }
+		void SetState( const ZED_BYTE p_Key, const ZED_BOOL p_State );
 
 	private:
 		ZED_BYTE	m_Key;

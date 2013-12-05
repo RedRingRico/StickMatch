@@ -8,6 +8,8 @@
 namespace StickMatch
 {
 	class GameState;
+	class GameStateInputListener;
+	class InputBinder;
 
 	class GameStateManager
 	{
@@ -32,6 +34,8 @@ namespace StickMatch
 
 		ZED::Utility::EventRouter *EventRouter( ) { return m_pEventRouter; }
 
+		ZED_UINT32 BindInput( const InputBinder *p_pInputBinder );
+
 	private:
 		std::stack< GameState * > m_GameStates;
 
@@ -41,6 +45,8 @@ namespace StickMatch
 		ZED_BOOL	m_Running;
 
 		ZED::Utility::EventRouter		*m_pEventRouter;
+		GameStateInputListener			*m_pInputListener;
+		InputBinder						*m_pInputBinder;
 	};
 }
 

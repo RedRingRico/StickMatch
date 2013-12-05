@@ -2,6 +2,8 @@
 #include <MainMenuState.hpp>
 #include <System/Memory.hpp>
 #include <StickFighter.hpp>
+#include <InputBinder.hpp>
+#include <GameplayEvents.hpp>
 #include <cstring>
 
 namespace StickMatch
@@ -25,6 +27,8 @@ namespace StickMatch
 		m_ElapsedTime = 0ULL;
 
 		m_pEventRouter = ZED_NULL;
+
+		m_pInputBinder = new InputBinder( );
 	}
 
 	GameplayState::~GameplayState( )
@@ -44,6 +48,10 @@ namespace StickMatch
 
 		m_pEventRouter =
 			new ZED::Utility::EventRouter( "Gameplay Events", ZED_TRUE, 2 );
+
+		m_pInputBinder->BindKey( 'w', MOVE_UP );
+
+		p_pManager->BindInput( m_pInputBinder );
 
 		return ZED_OK;
 	}

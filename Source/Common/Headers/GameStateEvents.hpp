@@ -5,6 +5,8 @@
 
 namespace StickMatch
 {
+	class InputBinder;
+
 	class GameStateInputListener : public ZED::Utility::EventListener
 	{
 	public:
@@ -15,6 +17,11 @@ namespace StickMatch
 
 		virtual ZED_CHAR8 *Name( ) const
 			{ return "Master Game State Input Listener"; }
+		
+		ZED_UINT32 Binder( InputBinder *p_pInputBinder );
+
+	private:
+		InputBinder	*m_pInputBinder;
 	};
 }
 

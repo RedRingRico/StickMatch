@@ -2,6 +2,9 @@
 #include <GameState.hpp>
 #include <System/DataTypes.hpp>
 #include <System/Time.hpp>
+#include <GameStateEvents.hpp>
+#include <System/Memory.hpp>
+#include <Events.hpp>
 
 namespace StickMatch
 {
@@ -11,10 +14,14 @@ namespace StickMatch
 		m_StartTime = ZED::System::GetTimeMiS( );
 		m_Running = ZED_TRUE;
 		m_pEventRouter = ZED_NULL;
+		m_pInputListener = new GameStateInputListener( );
+		m_pInputBinder = ZED_NULL;
 	}
 
 	GameStateManager::~GameStateManager( )
 	{
+		zedSafeDelete( m_pInputListener );
+
 		while( !m_GameStates.empty( ) )
 		{
 			this->Pop( );
@@ -56,6 +63,13 @@ namespace StickMatch
 
 		m_GameStates.top( )->Enter( this, m_GameAttributes );
 		m_pEventRouter = m_GameStates.top( )->EventRouter( );
+
+		if( m_pInputBinder )
+		{
+			m_pInputListener->Binder( m_pInputBinder );
+		}
+
+		m_pEventRouter->Add( m_pInputListener, KeyboardInputEventType );
 	}
 
 	void GameStateManager::Pop( )
@@ -66,6 +80,8 @@ namespace StickMatch
 				"stack\n", m_GameStates.top( )->Name( ) );
 
 			m_GameStates.pop( );
+
+			m_pInputListener->Binder( ZED_NULL );
 
 			if( !m_GameStates.empty( ) )
 			{
@@ -101,6 +117,13 @@ namespace StickMatch
 		const StickMatch::GameAttributes &p_GameAttributes )
 	{
 		m_GameAttributes = p_GameAttributes;
+	}
+
+	ZED_UINT32 GameStateManager::BindInput( const InputBinder *p_pInputBinder )
+	{
+		m_pInputBinder = const_cast< InputBinder * >( p_pInputBinder );
+
+		return ZED_OK;
 	}
 }
 

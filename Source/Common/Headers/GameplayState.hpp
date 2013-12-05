@@ -8,6 +8,8 @@
 
 namespace StickMatch
 {
+	class InputBinder;
+
 	class GameplayState : public GameState
 	{
 	public:
@@ -38,6 +40,8 @@ namespace StickMatch
 
 	private:
 		std::vector< BaseGameEntity * > m_Entities;
+
+		InputBinder	*m_pInputBinder;
 	};
 }
 
