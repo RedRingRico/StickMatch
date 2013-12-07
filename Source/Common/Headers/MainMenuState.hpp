@@ -5,6 +5,8 @@
 
 namespace StickMatch
 {
+	class MainMenuInputListener;
+
 	class MainMenuState : public GameState
 	{
 	public:
@@ -25,7 +27,14 @@ namespace StickMatch
 
 		static MainMenuState *Instance( );
 
+		void Exit( );
+
 	private:
+		InputBinder	*m_pInputBinder;
+		
+		ZED_BOOL	m_ExitState;
+
+		MainMenuInputListener	*m_pInputListener;
 	};
 }
 

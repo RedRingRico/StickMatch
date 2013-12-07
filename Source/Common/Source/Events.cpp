@@ -53,7 +53,8 @@ namespace StickMatch
 	{
 	}
 
-	ZED_UINT32 SemanticInputEventData::Semantic( const ZED_UINT32 p_Semantic,
+	ZED_UINT32 SemanticInputEventData::SetSemantic(
+		const ZED_UINT32 p_Semantic,
 		const ZED_FLOAT32 p_Value )
 	{
 		m_Semantic = p_Semantic;
@@ -74,8 +75,8 @@ namespace StickMatch
 		return ZED_OK;
 	}
 
-	void SemanticInputEventData::Semantic( ZED_UINT32 p_Semantic,
-		ZED_FLOAT32 p_Value ) const
+	void SemanticInputEventData::GetSemantic( ZED_UINT32 &p_Semantic,
+		ZED_FLOAT32 &p_Value ) const
 	{
 		p_Semantic = m_Semantic;
 		p_Value = m_Value;
@@ -96,7 +97,8 @@ namespace StickMatch
 	void SemanticInputEvent::Semantic( const ZED_UINT32 p_Semantic,
 		const ZED_FLOAT32 p_Value )
 	{
-		m_Semantic.Semantic( p_Semantic, p_Value );
+		zedTrace( "Setting semantic: %d\n", p_Semantic );
+		m_Semantic.SetSemantic( p_Semantic, p_Value );
 	}
 }
 

@@ -24,11 +24,13 @@ namespace StickMatch
 			ZED_UINT32	Semantic = 0;
 			ZED_FLOAT32	SemanticValue = 0.0f;
 
-			pSemanticData->Semantic( Semantic, SemanticValue );
+			pSemanticData->GetSemantic( Semantic, SemanticValue );
 
 			MoveEventData MoveData;
 			MoveData.SetActor( 1 );
 			ACTOR_MOVE_DIRECTION Direction = ACTOR_MOVE_DIRECTION_MIN;
+
+			zedTrace( "Semantic from gameplay: %u\n", Semantic );
 
 			switch( Semantic )
 			{

@@ -17,6 +17,8 @@ namespace StickMatch
 	{
 		m_Key[ p_Key ] = p_Semantic;
 
+		zedTrace( "Binding Key: %c to %u\n", p_Key, p_Semantic );
+
 		return ZED_OK;
 	}
 
@@ -30,12 +32,14 @@ namespace StickMatch
 	{
 		if( m_Key.empty( ) )
 		{
+			zedTrace( "Empty keys\n" );
 			return 0;
 		}
 		KeyMap::const_iterator Itr = m_Key.find( p_Key );
 
 		if( Itr == m_Key.end( ) )
 		{
+			zedTrace( "At the end\n" );
 			return 0;
 		}
 

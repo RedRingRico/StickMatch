@@ -4,6 +4,8 @@
 #include <Events.hpp>
 #include <MainMenuEvents.hpp>
 #include <cstring>
+#include <InputBinder.hpp>
+#include <Semantics.hpp>
 
 namespace StickMatch
 {
@@ -17,10 +19,15 @@ namespace StickMatch
 		m_pName[ NameLength ] = '\0';
 
 		m_pEventRouter = ZED_NULL;
+		m_pInputBinder = new InputBinder( );
+		m_ExitState = ZED_FALSE;
+
+		m_pInputListener = new MainMenuInputListener( );
 	}
 
 	MainMenuState::~MainMenuState( )
 	{
+		zedSafeDelete( m_pInputBinder );
 		zedSafeDelete( m_pEventRouter );
 		zedSafeDeleteArray( m_pName );
 	}
@@ -37,7 +44,16 @@ namespace StickMatch
 		m_pEventRouter = new ZED::Utility::EventRouter( "Main Menu Events",
 			ZED_TRUE, 2 );
 
-		m_pEventRouter->Add( new InputListener( ), KeyboardInputEventType );
+		m_pEventRouter->Add( m_pInputListener, SemanticInputEventType );
+
+		m_pInputBinder->BindKey( K_ESCAPE, STATE_EXIT );
+		m_pInputBinder->BindKey( 'y', STATE_EXIT_CONFIRM );
+		m_pInputBinder->BindKey( 'n', STATE_EXIT_CANCEL );
+
+		p_pManager->BindInput( m_pInputBinder );
+		zedTrace( "Main menu input binder: %p\n", m_pInputBinder );
+
+		m_pInputListener->SetMainMenuState( this );
 
 		return ZED_OK;
 	}
@@ -57,7 +73,7 @@ namespace StickMatch
 		m_GameAttributes.pRenderer->BeginScene( ZED_TRUE, ZED_TRUE, ZED_TRUE );
 		m_GameAttributes.pRenderer->EndScene( );
 
-		if( m_GameAttributes.pKeyboard->IsKeyDown( K_ESCAPE ) )
+		if( m_ExitState == ZED_TRUE )
 		{
 			this->Exit( p_pManager );
 		}
@@ -80,6 +96,11 @@ namespace StickMatch
 	{
 		static MainMenuState Instance;
 		return &Instance;
+	}
+
+	void MainMenuState::Exit( )
+	{
+		m_ExitState = ZED_TRUE;
 	}
 }
 

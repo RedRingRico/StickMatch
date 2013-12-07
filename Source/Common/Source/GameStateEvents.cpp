@@ -32,15 +32,18 @@ namespace StickMatch
 				
 				ZED_UINT32 SemanticID;
 				SemanticID = m_pInputBinder->Key( Key );
+				zedTrace( "ID: %u\n", SemanticID );
 
 				if( SemanticID != 0 )
 				{
 					ZED_FLOAT32 SemanticValue = KeyState ? 1.0f : 0.0f;
 					SemanticInputEventData SemanticData;
-					SemanticData.Semantic( SemanticID, SemanticValue );
+					SemanticData.SetSemantic( SemanticID, SemanticValue );
 					SemanticInputEvent Semantic( &SemanticData );
 
 					ZED::Utility::SendEvent( Semantic );
+
+					zedTrace( "Sending semantic %u\n", SemanticID );
 
 					return ZED_TRUE;
 				}
@@ -60,6 +63,8 @@ namespace StickMatch
 	ZED_UINT32 GameStateInputListener::Binder( InputBinder *p_pInputBinder )
 	{
 		m_pInputBinder = p_pInputBinder;
+		zedTrace( "GSM private IB: %p | passed IB: %p\n", m_pInputBinder,
+			p_pInputBinder );
 
 		return ZED_OK;
 	}

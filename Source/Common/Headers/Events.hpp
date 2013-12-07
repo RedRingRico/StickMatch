@@ -44,10 +44,10 @@ namespace StickMatch
 		SemanticInputEventData( );
 		virtual ~SemanticInputEventData( );
 
-		ZED_UINT32 Semantic( const ZED_UINT32 p_Semantic,
+		ZED_UINT32 SetSemantic( const ZED_UINT32 p_Semantic,
 			const ZED_FLOAT32 p_Value );
 
-		void Semantic( ZED_UINT32 p_Semantic, ZED_FLOAT32 p_Value ) const;
+		void GetSemantic( ZED_UINT32 &p_Semantic, ZED_FLOAT32 &p_Value ) const;
 
 	private:
 		ZED_UINT32	m_Semantic;

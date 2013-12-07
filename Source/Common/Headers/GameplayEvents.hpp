@@ -7,15 +7,15 @@
 
 namespace StickMatch
 {
-	const ZED_UINT32 MOVE_UP		= 1;
-	const ZED_UINT32 MOVE_DOWN		= 2;
-	const ZED_UINT32 MOVE_LEFT		= 3;
-	const ZED_UINT32 MOVE_RIGHT		= 4;
-	const ZED_UINT32 ACTION_KICK	= 5;
-	const ZED_UINT32 ACTION_PUNCH	= 6;
-	const ZED_UINT32 ACTION_GUARD	= 7;
-	const ZED_UINT32 ACTION_THROW	= 8;
-	const ZED_UINT32 STATE_PAUSE	= 9;
+	const ZED_UINT32 MOVE_UP		= 8096;
+	const ZED_UINT32 MOVE_DOWN		= 8097;
+	const ZED_UINT32 MOVE_LEFT		= 8097;
+	const ZED_UINT32 MOVE_RIGHT		= 8097;
+	const ZED_UINT32 ACTION_KICK	= 8097;
+	const ZED_UINT32 ACTION_PUNCH	= 8097;
+	const ZED_UINT32 ACTION_GUARD	= 8097;
+	const ZED_UINT32 ACTION_THROW	= 8097;
+	const ZED_UINT32 STATE_PAUSE	= 8097;
 
 	const ZED::Utility::EventType MoveEventType( "StickFighter Move" );
 	const ZED::Utility::EventType ActionEventType( "StickFighter Action" );
