@@ -5,6 +5,7 @@
 #include <InputBinder.hpp>
 #include <Events.hpp>
 #include <GameplayEvents.hpp>
+#include <Semantics.hpp>
 #include <cstring>
 
 namespace StickMatch
@@ -46,17 +47,20 @@ namespace StickMatch
 
 		m_GameAttributes.pRenderer->ClearColour( 0.12f, 0.0f, 0.12f );
 
-		m_GameAttributes.pKeyboard->AllKeysUp( );
-
 		m_pEventRouter =
 			new ZED::Utility::EventRouter( "Gameplay Events", ZED_TRUE, 2 );
 
 		m_pInputBinder->BindKey( 'w', MOVE_UP );
+		m_pInputBinder->BindKey( K_ESCAPE, STATE_EXIT );
 
 		p_pManager->BindInput( m_pInputBinder );
 
 		m_pEventRouter->Add( m_pInputListener, MoveEventType );
 		m_pEventRouter->Add( m_pInputListener, SemanticInputEventType );
+
+		m_ExitState = ZED_FALSE;
+
+		m_pInputListener->SetGameplayState( this );
 
 		return ZED_OK;
 	}
@@ -80,7 +84,7 @@ namespace StickMatch
 		m_GameAttributes.pRenderer->EndScene( );
 		++Counter;
 
-		if( m_GameAttributes.pKeyboard->IsKeyDown( K_ESCAPE ) )
+		if( m_ExitState )
 		{
 			p_pManager->ChangeState( MainMenuState::Instance( ) );
 		}
@@ -150,6 +154,11 @@ namespace StickMatch
 		pFighter->Initialise( );
 
 		return ZED_OK;
+	}
+
+	void GameplayState::Exit( )
+	{
+		m_ExitState = ZED_TRUE;
 	}
 }
 

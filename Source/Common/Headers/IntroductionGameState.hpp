@@ -26,6 +26,7 @@ namespace StickMatch
 		static IntroductionGameState *Instance( );
 
 	private:
+		ZED_BOOL	m_SkipIntroduction;
 	};
 }
 

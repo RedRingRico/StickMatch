@@ -20,7 +20,6 @@ namespace StickMatch
 
 		m_pEventRouter = ZED_NULL;
 		m_pInputBinder = new InputBinder( );
-		m_ExitState = ZED_FALSE;
 
 		m_pInputListener = new MainMenuInputListener( );
 	}
@@ -39,8 +38,6 @@ namespace StickMatch
 
 		m_GameAttributes.pRenderer->ClearColour( 0.0f, 1.0f, 0.0f );
 
-		m_GameAttributes.pKeyboard->AllKeysUp( );
-
 		m_pEventRouter = new ZED::Utility::EventRouter( "Main Menu Events",
 			ZED_TRUE, 2 );
 
@@ -49,11 +46,14 @@ namespace StickMatch
 		m_pInputBinder->BindKey( K_ESCAPE, STATE_EXIT );
 		m_pInputBinder->BindKey( 'y', STATE_EXIT_CONFIRM );
 		m_pInputBinder->BindKey( 'n', STATE_EXIT_CANCEL );
+		m_pInputBinder->BindKey( K_ENTER, MAIN_MENU_START_GAME );
 
 		p_pManager->BindInput( m_pInputBinder );
-		zedTrace( "Main menu input binder: %p\n", m_pInputBinder );
 
 		m_pInputListener->SetMainMenuState( this );
+
+		m_StartGame = ZED_FALSE;
+		m_ExitState = ZED_FALSE;
 
 		return ZED_OK;
 	}
@@ -78,7 +78,7 @@ namespace StickMatch
 			this->Exit( p_pManager );
 		}
 
-		if( m_GameAttributes.pKeyboard->IsKeyDown( K_ENTER ) )
+		if( m_StartGame == ZED_TRUE )
 		{
 			p_pManager->ChangeState( GameplayState::Instance( ) );
 		}
@@ -101,6 +101,11 @@ namespace StickMatch
 	void MainMenuState::Exit( )
 	{
 		m_ExitState = ZED_TRUE;
+	}
+
+	void MainMenuState::StartGame( )
+	{
+		m_StartGame = ZED_TRUE;
 	}
 }
 

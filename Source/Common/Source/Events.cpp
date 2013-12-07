@@ -97,7 +97,6 @@ namespace StickMatch
 	void SemanticInputEvent::Semantic( const ZED_UINT32 p_Semantic,
 		const ZED_FLOAT32 p_Value )
 	{
-		zedTrace( "Setting semantic: %d\n", p_Semantic );
 		m_Semantic.SetSemantic( p_Semantic, p_Value );
 	}
 }

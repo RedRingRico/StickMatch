@@ -5,6 +5,8 @@
 
 namespace StickMatch
 {
+	const ZED_UINT32 MAIN_MENU_START_GAME	= 9001;
+
 	class MainMenuState;
 
 	class MainMenuInputListener : public ZED::Utility::EventListener

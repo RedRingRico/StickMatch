@@ -7,19 +7,21 @@
 
 namespace StickMatch
 {
-	const ZED_UINT32 MOVE_UP		= 8096;
-	const ZED_UINT32 MOVE_DOWN		= 8097;
-	const ZED_UINT32 MOVE_LEFT		= 8097;
-	const ZED_UINT32 MOVE_RIGHT		= 8097;
-	const ZED_UINT32 ACTION_KICK	= 8097;
-	const ZED_UINT32 ACTION_PUNCH	= 8097;
-	const ZED_UINT32 ACTION_GUARD	= 8097;
-	const ZED_UINT32 ACTION_THROW	= 8097;
-	const ZED_UINT32 STATE_PAUSE	= 8097;
+	const ZED_UINT32 MOVE_UP		= 8097;
+	const ZED_UINT32 MOVE_DOWN		= 8098;
+	const ZED_UINT32 MOVE_LEFT		= 8099;
+	const ZED_UINT32 MOVE_RIGHT		= 8100;
+	const ZED_UINT32 ACTION_KICK	= 8101;
+	const ZED_UINT32 ACTION_PUNCH	= 8102;
+	const ZED_UINT32 ACTION_GUARD	= 8103;
+	const ZED_UINT32 ACTION_THROW	= 8104;
+	const ZED_UINT32 STATE_PAUSE	= 8105;
 
 	const ZED::Utility::EventType MoveEventType( "StickFighter Move" );
 	const ZED::Utility::EventType ActionEventType( "StickFighter Action" );
 	const ZED::Utility::EventType StateEventType( "State Change" );
+
+	class GameplayState;
 
 	class GameplayInputListener : public ZED::Utility::EventListener
 	{
@@ -30,7 +32,11 @@ namespace StickMatch
 		virtual ZED_BOOL HandleEvent( const ZED::Utility::Event &p_Event );
 
 		virtual ZED_CHAR8 *Name( ) const { return "Gameplay Input Listener"; }
+		
+		void SetGameplayState( GameplayState *p_pGameplayState );
+
 	private:
+		GameplayState	*m_pGameplayState;
 	};
 
 	class MoveEventData : public ZED::Utility::EventData

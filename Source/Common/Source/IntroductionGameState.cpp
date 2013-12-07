@@ -39,10 +39,10 @@ namespace StickMatch
 
 		m_GameAttributes.pRenderer->ClearColour( 1.0f, 0.0f, 0.0f );
 
-		m_GameAttributes.pKeyboard->AllKeysUp( );
-
 		m_pEventRouter = new ZED::Utility::EventRouter(
 			"Introduction events", ZED_TRUE, 2 );
+
+		m_SkipIntroduction = ZED_FALSE;
 
 		return ZED_OK;
 	}
@@ -63,8 +63,7 @@ namespace StickMatch
 		m_GameAttributes.pRenderer->BeginScene( ZED_TRUE, ZED_TRUE, ZED_TRUE );
 		m_GameAttributes.pRenderer->EndScene( );
 
-		if( ( m_ElapsedTime >= 1000000ULL ) ||
-			m_GameAttributes.pKeyboard->IsKeyDown( K_ESCAPE ) )
+		if( ( m_ElapsedTime >= 1000000ULL ) || m_SkipIntroduction )
 		{
 			zedTrace( "Elapsed: %llu\n", m_ElapsedTime );
 			m_ElapsedTime = 0ULL;

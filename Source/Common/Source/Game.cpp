@@ -70,8 +70,6 @@ namespace StickMatch
 
 		GameAttributes Attribs;
 		Attribs.pInputManager = m_pInputManager;
-		Attribs.pKeyboard = &m_Keyboard;
-		Attribs.pMouse = &m_Mouse;
 		Attribs.pRenderer = m_pRenderer;
 
 		m_StateManager.GameAttributes( Attribs );

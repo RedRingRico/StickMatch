@@ -28,11 +28,13 @@ namespace StickMatch
 		static MainMenuState *Instance( );
 
 		void Exit( );
+		void StartGame( );
 
 	private:
 		InputBinder	*m_pInputBinder;
 		
 		ZED_BOOL	m_ExitState;
+		ZED_BOOL	m_StartGame;
 
 		MainMenuInputListener	*m_pInputListener;
 	};

@@ -2,6 +2,7 @@
 #include <MainMenuState.hpp>
 #include <Events.hpp>
 #include <Semantics.hpp>
+#include <Arithmetic/Arithmetic.hpp>
 
 namespace StickMatch
 {
@@ -27,14 +28,22 @@ namespace StickMatch
 
 			pSemanticData->GetSemantic( Semantic, SemanticValue );
 
-
-			zedTrace( "Semantic: %d\n", Semantic );
-
 			switch( Semantic )
 			{
 				case STATE_EXIT:
 				{
-					m_pMainMenu->Exit( );
+					if( ZED::Arithmetic::Equal( SemanticValue, 1.0f ) )
+					{
+						m_pMainMenu->Exit( );
+					}
+					break;
+				}
+				case MAIN_MENU_START_GAME:
+				{
+					if( ZED::Arithmetic::Equal( SemanticValue, 1.0f ) )
+					{
+						m_pMainMenu->StartGame( );
+					}
 					break;
 				}
 				default:

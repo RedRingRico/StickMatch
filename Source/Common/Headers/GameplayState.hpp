@@ -39,12 +39,16 @@ namespace StickMatch
 		ZED_UINT32 AssignCharacter( const ZED_UINT32 p_CharacterTypeID,
 			const ZED_UINT32 p_Type, const ZED_UINT32 p_Slot );
 
+		void Exit( );
+
 	private:
 		std::vector< BaseGameEntity * > m_Entities;
 
 		InputBinder	*m_pInputBinder;
 
 		GameplayInputListener	*m_pInputListener;
+
+		ZED_BOOL	m_ExitState;
 	};
 }
 

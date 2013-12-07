@@ -2,6 +2,9 @@
 #include <Events.hpp>
 #include <System/Memory.hpp>
 #include <Utility/EventRouter.hpp>
+#include <GameplayState.hpp>
+#include <Semantics.hpp>
+#include <Arithmetic/Arithmetic.hpp>
 
 namespace StickMatch
 {
@@ -30,13 +33,19 @@ namespace StickMatch
 			MoveData.SetActor( 1 );
 			ACTOR_MOVE_DIRECTION Direction = ACTOR_MOVE_DIRECTION_MIN;
 
-			zedTrace( "Semantic from gameplay: %u\n", Semantic );
-
 			switch( Semantic )
 			{
 				case MOVE_UP:
 				{
 					Direction = ACTOR_MOVE_DIRECTION_UP;
+					break;
+				}
+				case STATE_EXIT:
+				{
+					if( ZED::Arithmetic::Equal( SemanticValue, 1.0f ) )
+					{
+						m_pGameplayState->Exit( );
+					}
 					break;
 				}
 			}
@@ -56,6 +65,12 @@ namespace StickMatch
 		}
 
 		return ZED_FALSE;
+	}
+
+	void GameplayInputListener::SetGameplayState(
+		GameplayState *p_pGameplayState )
+	{
+		m_pGameplayState = p_pGameplayState;
 	}
 
 	MoveEventData::MoveEventData( ) :
