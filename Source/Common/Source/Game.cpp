@@ -3,6 +3,7 @@
 #include <System/Memory.hpp>
 #include <unistd.h>
 #include <IntroductionGameState.hpp>
+#include <GameplayState.hpp>
 #include <Events.hpp>
 
 const ZED_FLOAT32 THRUST_SPEED = 0.2f;
@@ -74,7 +75,8 @@ namespace StickMatch
 
 		m_StateManager.GameAttributes( Attribs );
 
-		m_StateManager.Push( IntroductionGameState::Instance( ) );
+		//m_StateManager.Push( IntroductionGameState::Instance( ) );
+		m_StateManager.Push( GameplayState::Instance( ) );
 
 		ZED_KEYBOARDSTATE OldKeyboardState;
 		memset( &OldKeyboardState, 0, sizeof( OldKeyboardState ) );

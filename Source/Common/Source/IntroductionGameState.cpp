@@ -47,7 +47,7 @@ namespace StickMatch
 		if( m_pEventRouter == ZED_NULL )
 		{
 			m_pEventRouter = new ZED::Utility::EventRouter(
-				"Introduction events", ZED_TRUE, 2 );
+				"Introduction Events", ZED_TRUE, 2 );
 		}
 
 		m_SkipIntroduction = ZED_FALSE;

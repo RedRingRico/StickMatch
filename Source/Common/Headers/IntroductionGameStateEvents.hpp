@@ -19,7 +19,7 @@ namespace StickMatch
 		virtual ZED_BOOL HandleEvent( const ZED::Utility::Event &p_Event );
 
 		virtual ZED_CHAR8 *Name( ) const
-			{ return "Introdution Input Listener"; }
+			{ return "Introduction Input Listener"; }
 
 	private:
 		IntroductionGameState *m_pIntroductionGameState;
