@@ -2,6 +2,9 @@
 #include <MainMenuState.hpp>
 #include <System/Debugger.hpp>
 #include <System/Memory.hpp>
+#include <InputBinder.hpp>
+#include <Events.hpp>
+#include <IntroductionGameStateEvents.hpp>
 #include <cstring>
 
 namespace StickMatch
@@ -23,6 +26,8 @@ namespace StickMatch
 		m_pName[ NameLength ] = '\0';
 
 		m_pEventRouter = ZED_NULL;
+		m_pInputListener = ZED_NULL;
+		m_pInputBinder = ZED_NULL;
 	}
 
 	IntroductionGameState::~IntroductionGameState( )
@@ -39,10 +44,26 @@ namespace StickMatch
 
 		m_GameAttributes.pRenderer->ClearColour( 1.0f, 0.0f, 0.0f );
 
-		m_pEventRouter = new ZED::Utility::EventRouter(
-			"Introduction events", ZED_TRUE, 2 );
+		if( m_pEventRouter == ZED_NULL )
+		{
+			m_pEventRouter = new ZED::Utility::EventRouter(
+				"Introduction events", ZED_TRUE, 2 );
+		}
 
 		m_SkipIntroduction = ZED_FALSE;
+
+		if( m_pInputListener == ZED_NULL )
+		{
+			m_pInputListener = new IntroductionInputListener( this );
+			m_pEventRouter->Add( m_pInputListener, SemanticInputEventType );
+		}
+
+		if( m_pInputBinder == ZED_NULL )
+		{
+			m_pInputBinder = new InputBinder( );
+			m_pInputBinder->BindKey( K_ESCAPE, INTRODUCTION_SKIP );
+			p_pManager->BindInput( m_pInputBinder );
+		}
 
 		return ZED_OK;
 	}
@@ -77,6 +98,11 @@ namespace StickMatch
 
 	void IntroductionGameState::RestoreState( )
 	{
+	}
+
+	void IntroductionGameState::SkipIntroduction( )
+	{
+		m_SkipIntroduction = ZED_TRUE;
 	}
 }
 

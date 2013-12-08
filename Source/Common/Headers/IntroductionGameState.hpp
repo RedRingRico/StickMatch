@@ -5,6 +5,9 @@
 
 namespace StickMatch
 {
+	class InputBinder;
+	class IntroductionInputListener;
+
 	class IntroductionGameState : public GameState
 	{
 	public:
@@ -25,8 +28,14 @@ namespace StickMatch
 
 		static IntroductionGameState *Instance( );
 
+		void SkipIntroduction( );
+
 	private:
 		ZED_BOOL	m_SkipIntroduction;
+
+		InputBinder	*m_pInputBinder;
+
+		IntroductionInputListener	*m_pInputListener;
 	};
 }
 

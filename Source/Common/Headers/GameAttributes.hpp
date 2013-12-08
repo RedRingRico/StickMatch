@@ -16,8 +16,6 @@ namespace StickMatch
 	typedef struct __tagGameAttributes
 	{
 		ZED::System::InputManager	*pInputManager;
-/*		ZED::System::Keyboard		*pKeyboard;
-		ZED::System::Mouse			*pMouse;*/
 		ZED::Renderer::Renderer		*pRenderer;
 	} GameAttributes;
 }
