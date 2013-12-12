@@ -27,6 +27,9 @@ namespace StickMatch
 
 	protected:
 		ZED_UINT32	m_Type;
+
+	private:
+		ZED_UINT32 PreInitialise( );
 	};
 }
 

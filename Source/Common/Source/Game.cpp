@@ -35,9 +35,9 @@ namespace StickMatch
 	{
 		// NOT CROSS-PLATFORM!
 		XEvent Event;
-		ZED::System::WINDOWDATA	WindowData = m_pWindow->WindowData( );
 		// !NOT CROSS-PLATFORM
-		
+
+		ZED::System::WINDOWDATA	WindowData = m_pWindow->WindowData( );
 		m_Running = ZED_TRUE;
 
 		// Set up the world grid
